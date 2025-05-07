@@ -29,6 +29,7 @@ public class HealthUtilIT {
   private static String port;
   private static String contextRoot;
   private static String baseUrl;
+  private static String alternateTestUrl = System.getProperty("healthTestUrl");
   private final static String HEALTH_ENDPOINT = "health";
   public static final String INV_MAINTENANCE_FALSE = "io_openliberty_sample_system_inMaintenance\":false";
   public static final String INV_MAINTENANCE_TRUE = "io_openliberty_sample_system_inMaintenance\":true";
@@ -36,7 +37,7 @@ public class HealthUtilIT {
   static {
     port = System.getProperty("http.port");
     contextRoot = System.getProperty("app.context.root");
-    baseUrl = "http://localhost:" + port + contextRoot;
+    baseUrl = alternateTestUrl != null ? alternateTestUrl + contextRoot : "http://localhost:" + port + contextRoot;
   }
 
   public static JsonArray connectToHealthEnpoint(int expectedResponseCode) {
